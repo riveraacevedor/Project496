@@ -4,10 +4,8 @@ import Profile from "./ProfilePage";
 
 function App() {
   return (
-    <div className="h-full w-full bg-gray-100">
-      <Profile />
+    <div className="h-screen w-screen">
+          <Profile />
     </div>
   );
 }
-
-export default App;

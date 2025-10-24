@@ -1,5 +1,6 @@
 export default function Profile() {
   return (
+    <div className="h-screen w-screen flex flex-col">
     <div className="rounded-[18px] border-8 border-[#CAC4D0] bg-[#FEF7FF] min-w-screen min-h-screen overflow-auto relative">
       <div className="flex pt-11 pr-0 pb-14 pl-0 flex-col items-center gap-10 shrink-0 bg-[#FFDCBE] w-18 h-[709px] absolute left-0 top-17 overflow-hidden">
         <div className="flex flex-col items-center gap-1 w-fit">
@@ -377,6 +378,7 @@ export default function Profile() {
           />
         </svg>
       </div>
+    </div>
     </div>
   );
 }
