@@ -1,7 +1,6 @@
 import React from "react";
 import HomePage from "./HomePage";
-{/*}import Profile from "./ProfilePage";*/}
-import Profile from "./index.jsx"
+import Profile from "./ProfilePage";
 
 function App() {
   return (
