@@ -1,12 +1,19 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import svgr from 'vite-plugin-svgr'
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),  // handles JSX and React
+    svgr(),   // allows importing SVGs as React components
+  ],
+  build: {
+    outDir: 'dist',   // default build folder
+  },
   preview: {
-    host: '0.0.0.0', // ensures Render can reach it
-    port: process.env.PORT, // use Render's PORT environment variable
-    allowedHosts: ['four96projectlive.onrender.com'], // add your Render hostname
-  }
+    host: '0.0.0.0',             // needed for Render
+    port: process.env.PORT,       // Render dynamically sets the port
+    allowedHosts: ['*'],         // allow Render host
+  },
 })
+
