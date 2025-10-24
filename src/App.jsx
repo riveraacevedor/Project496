@@ -5,7 +5,9 @@ import Profile from "./ProfilePage";
 function App() {
   return (
     <div className="h-screen w-screen">
-          <Profile />
+      <Profile />
     </div>
   );
 }
+
+export default App; 
