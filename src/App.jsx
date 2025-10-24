@@ -1,15 +1,15 @@
-// src/App.jsx
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Landing from "./components/Landing";
 import Profile from "./components/Profile";
-import "./App.css"; // Tailwind or custom styles
 
-function App() {
+export default function App() {
   return (
-    <div className="min-h-screen min-w-screen bg-[#FEF7FF] flex flex-col md:flex-row">
-      {/* Sidebar (from Profile component) */}
-      <Profile />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
