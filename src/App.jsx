@@ -1,13 +1,11 @@
-import React from "react";
-import HomePage from "./HomePage";
-import Profile from "./ProfilePage";
+import Profile from "./Profile";
 
 function App() {
   return (
-    <div className="h-screen w-screen">
+    <div className="min-h-screen bg-[#FEF7FF]">
       <Profile />
     </div>
   );
 }
 
-export default App; 
+export default App;
