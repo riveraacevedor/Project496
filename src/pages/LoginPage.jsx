@@ -1,82 +1,77 @@
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PageLayout from "../layout/PageLayout";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [show, setShow] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: integrate actual login logic
-    navigate("/profile");
+    if (email === "me@me.com" && password === "12345") {
+      setError("");
+      navigate("/profile");
+    } else {
+      setError("Invalid credentials");
+    }
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-[#FFDCBE] relative">
-      {/* Top Menu Icon */}
-      <div className="absolute top-16 left-6">
-        <button onClick={() => navigate("/")} className="p-3 rounded-2xl hover:bg-[#FFB28F] transition">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="w-6 h-6 text-[#600E05]"
-          >
-            <path d="M3 18V16H21V18H3ZM3 13V11H21V13H3ZM3 8V6H21V8H3Z" fill="currentColor" />
-          </svg>
-        </button>
-      </div>
+    <PageLayout>
+      <div className="max-w-md mx-auto bg-white rounded-2xl p-6">
+        <h2 className="text-2xl text-[#600E05] mb-4">Login</h2>
 
-      {/* Login Card */}
-      <div className="flex flex-col items-center bg-[#FEF7FF] rounded-[28px] shadow-lg p-8 mt-32 w-[360px] gap-6">
-        <h1 className="text-3xl font-medium text-[#600E05] text-center">
-          Login
-        </h1>
+        {/* Form handles both Enter key and button click */}
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-3"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault(); // prevent accidental form resubmits
+              handleSubmit(e);
+            }
+          }}
+        >
+          <input
+            className="p-2 border rounded"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-        <form onSubmit={handleLogin} className="flex flex-col gap-4 w-full">
-          <div className="flex flex-col gap-1">
-            <label htmlFor="email" className="text-[#600E05] font-medium text-sm">
-              Email
-            </label>
+          <div className="relative">
             <input
-              type="email"
-              id="email"
-              placeholder="you@example.com"
+              className="p-2 border rounded w-full"
+              type={show ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full h-12 px-4 rounded-2xl border border-[#FF9393] focus:outline-none focus:ring-2 focus:ring-[#FF9393]"
             />
+            <button
+              type="button"
+              onClick={() => setShow((s) => !s)}
+              className="absolute right-2 top-2 text-xs text-[#600E05]"
+            >
+              {show ? "Hide" : "Show"}
+            </button>
           </div>
 
-          <div className="flex flex-col gap-1">
-            <label htmlFor="password" className="text-[#600E05] font-medium text-sm">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="••••••••"
-              required
-              className="w-full h-12 px-4 rounded-2xl border border-[#FF9393] focus:outline-none focus:ring-2 focus:ring-[#FF9393]"
-            />
-          </div>
+          {error && <p className="text-red-500">{error}</p>}
 
           <button
             type="submit"
-            className="w-full h-12 bg-[#FF9393] rounded-2xl text-[#600E05] font-medium hover:bg-[#f36b6b] transition"
+            className="px-4 py-2 bg-[#FF9393] rounded text-white mt-2"
           >
-            Log In
+            Sign In
           </button>
         </form>
-
-        <p className="text-[#600E05] text-sm text-center">
-          Don’t have an account?{" "}
-          <button
-            onClick={() => navigate("/signup")}
-            className="font-medium underline hover:text-[#FF9393]"
-          >
-            Sign up
-          </button>
-        </p>
       </div>
-    </div>
+    </PageLayout>
   );
 }
