@@ -1,15 +1,18 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Landing from "./components/Landing";
-import Profile from "./components/Profile";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import ProfilePage from "./pages/ProfilePage";
+import TitlesLibraryRated from "./pages/TitlesLibraryRated";
 
 export default function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/library" element={<TitlesLibraryRated />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
