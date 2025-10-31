@@ -3,8 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
-import LoginPage from "./pages/LoginPage";
 import TitlesLibrary from "./pages/TitlesLibrary";
+import DetailedTitlePage from "./pages/DetailedTitle";
+import LoginPage from "./pages/LoginPage";
+import UserReviews from "./pages/UserReviews";
 
 
 export default function App() {
@@ -12,10 +14,13 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/titles" element={<TitlesLibrary />} />
-
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/library" element={<TitlesLibrary />} />
+        <Route path="/detail/:id" element={<DetailedTitlePage />} />
+        <Route path="/user_review" element={<UserReviews />} />
+        {/* optional: catch-all route */}
+        <Route path="*" element={<HomePage />} />
       </Routes>
     </BrowserRouter>
   );

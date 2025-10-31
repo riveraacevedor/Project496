@@ -42,7 +42,7 @@ export default function DetailedTitlePage() {
         {/* More sections if needed */}
         <div className="mt-6">
           <button className="px-4 py-2 bg-[#FF9393] rounded-lg text-white mr-2">Purchase / Rent</button>
-          <button className="px-4 py-2 bg-[#FF9393] rounded-lg text-white mr-2">User Reviews</button>
+          <button onClick={() => navigate("/user_review")} className="px-4 py-2 bg-[#FF9393] rounded-lg text-white mr-2">User Reviews</button>
           <button onClick={() => navigate(-1)} className="px-4 py-2 border rounded-lg">
             Back to Library
           </button>
