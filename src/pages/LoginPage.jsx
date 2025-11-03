@@ -9,13 +9,26 @@ export default function LoginPage() {
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {   // <-- added async here
     e.preventDefault();
-    if (email === "me@me.com" && password === "12345") {
-      setError("");
-      navigate("/profile");
-    } else {
-      setError("Invalid credentials");
+    try {
+      const res = await fetch("https://cmpt496-backend.onrender.com/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        console.log("Login successful:", data);
+        navigate("/profile");
+      } else {
+        setError(data.message || "Invalid credentials");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      setError("Server error. Please try again later.");
     }
   };
 
@@ -30,7 +43,7 @@ export default function LoginPage() {
           className="flex flex-col gap-3"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              e.preventDefault(); // prevent accidental form resubmits
+              e.preventDefault();
               handleSubmit(e);
             }
           }}
