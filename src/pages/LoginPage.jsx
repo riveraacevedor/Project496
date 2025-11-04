@@ -4,18 +4,18 @@ import PageLayout from "../layout/PageLayout";
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");  // changed from email
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {   // <-- added async here
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("https://cmpt496-backend.onrender.com/login", {
+      const res = await fetch("https://cmpt496-backend-1.onrender.com/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }), // match backend
       });
 
       const data = await res.json();
@@ -36,8 +36,6 @@ export default function LoginPage() {
     <PageLayout>
       <div className="max-w-md mx-auto bg-white rounded-2xl p-6">
         <h2 className="text-2xl text-[#600E05] mb-4">Login</h2>
-
-        {/* Form handles both Enter key and button click */}
         <form
           onSubmit={handleSubmit}
           className="flex flex-col gap-3"
@@ -50,10 +48,10 @@ export default function LoginPage() {
         >
           <input
             className="p-2 border rounded"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
 
