@@ -8,6 +8,7 @@ import DetailedTitlePage from "./pages/DetailedTitle";
 import LoginPage from "./pages/LoginPage";
 import UserReviews from "./pages/UserReviews";
 
+import SignupPage from "./pages/SignupPage";
 
 export default function App() {
   return (
@@ -17,9 +18,12 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/library" element={<TitlesLibrary />} />
-        <Route path="/detail/:id" element={<DetailedTitlePage />} />
+        <Route path="/detail/:type/:id" element={<DetailedTitlePage />} />
         <Route path="/user_review" element={<UserReviews />} />
-        {/* optional: catch-all route */}
+
+        <Route path="/signup" element={<SignupPage />} />
+
+        {/* fallback */}
         <Route path="*" element={<HomePage />} />
       </Routes>
     </BrowserRouter>
