@@ -11,7 +11,7 @@ export default function TitlesLibrary() {
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch("http://localhost:3000/library");
+        const res = await fetch("https://cmpt496-backend-8wrp.onrender.com/library");
         const data = await res.json();
         setItems(data);
       } catch (err) {

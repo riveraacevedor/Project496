@@ -13,7 +13,7 @@ export default function DetailedTitlePage() {
     async function load() {
       try {
         const base = type === "movie" ? "movies" : "books";
-        const res = await fetch(`http://localhost:3000/${base}/${id}`);
+        const res = await fetch(`https://cmpt496-backend-8wrp.onrender.com/${base}/${id}`);
         if (!res.ok) {
           setItem(null);
         } else {
