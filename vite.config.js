@@ -16,4 +16,3 @@ export default defineConfig({
     allowedHosts: ['project496.onrender.com'],         // allow Render host
   },
 })
-
