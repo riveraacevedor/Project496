@@ -13,6 +13,6 @@ export default defineConfig({
   preview: {
     host: '0.0.0.0',             // needed for Render
     port: process.env.PORT,       // Render dynamically sets the port
-    allowedHosts: ['https://project496-enbl.onrender.com'],         // allow Render host
+    allowedHosts: ['project496-enbl.onrender.com'],         // allow Render host
   },
 })
