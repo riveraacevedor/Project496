@@ -66,7 +66,7 @@ button:hover {
   }
 }
 
-/* Fix for dark text background*/
+/* Fix for dark text background */
 input,
 textarea,
 select {
@@ -74,4 +74,14 @@ select {
   color: black !important;
   -webkit-text-fill-color: black !important;
   appearance: none !important;
+}
+
+/* Adding carousel */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
