@@ -1,15 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import PageLayout from "../layout/PageLayout";
-import { libraryData } from "../components/LibraryData";
 
 export default function DetailedTitlePage() {
-  const { id } = useParams();
+  const { type, id } = useParams(); // <-- expects /detail/:type/:id
   const navigate = useNavigate();
-  const item = libraryData.find((entry) => entry.id === parseInt(id, 10));
 
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  
+  useEffect(() => {
+    async function load() {
+      try {
+        const base = type === "movie" ? "movies" : "books";
+        const res = await fetch(`http://localhost:3000/${base}/${id}`);
+        if (!res.ok) {
+          setItem(null);
+        } else {
+          const data = await res.json();
+          setItem(data);
+        }
+      } catch (e) {
+        console.error("Failed to load item:", e);
+        setItem(null);
+      } finally {
+        setLoading(false);
+      }
+    }
+    load();
+  }, [type, id]);
+
+  if (loading) {
+    return (
+      <PageLayout>
+        <div className="rounded-[18px] border-8 border-[#CAC4D0] bg-[#FFE3E3] p-8">
+          <p className="text-[#600E05]">Loading…</p>
+        </div>
+      </PageLayout>
+    );
+  }
+
   if (!item) {
     return (
       <PageLayout>
@@ -28,21 +58,32 @@ export default function DetailedTitlePage() {
 
   return (
     <PageLayout>
-      <div className="rounded-[18px] border-8 border-[#CAC4D0] bg-[#FFE3E3] p-6 max-w-4xl">
-        <div className="flex gap-6">
-          <img src={item.image} alt={item.title} className="w-48 h-64 object-cover rounded-lg" />
+      <div className="rounded-[18px] border-8 border-[#CAC4D0] bg-[#FFE3E3] p-6 max-w-4xl mx-auto">
+        <div className="flex flex-col md:flex-row gap-6">
+          <img
+            src={item.image_url}
+            alt={item.title}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "/placeholder-cover.png";
+            }}
+            className="w-48 h-64 object-cover rounded-lg"
+          />
           <div>
             <h1 className="text-2xl text-[#600E05] font-medium">{item.title}</h1>
-            <p className="text-sm text-[#600E05] mb-2">{item.author}</p>
+            <p className="text-sm text-[#600E05] mb-2">
+              {item.creator || (type === "movie" ? "Movie" : "")}
+            </p>
             <p className="text-sm text-[#600E05] mb-4">{item.description}</p>
-            <p className="text-sm text-[#49454F]">Rating: {item.rating}</p>
+            <p className="text-sm text-[#49454F]">Rating: {item.rating ?? "—"}</p>
           </div>
         </div>
 
-        {/* More sections if needed */}
-        <div className="mt-6">
-          <button className="px-4 py-2 bg-[#FF9393] rounded-lg text-white mr-2">Purchase / Rent</button>
-          <button onClick={() => navigate("/user_review")} className="px-4 py-2 bg-[#FF9393] rounded-lg text-white mr-2">User Reviews</button>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <button className="px-4 py-2 bg-[#FF9393] rounded-lg text-white">Purchase / Rent</button>
+          <button onClick={() => navigate("/user_review")} className="px-4 py-2 bg-[#FF9393] rounded-lg text-white">
+            User Reviews
+          </button>
           <button onClick={() => navigate(-1)} className="px-4 py-2 border rounded-lg">
             Back to Library
           </button>

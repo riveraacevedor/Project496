@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/library" element={<TitlesLibrary />} />
-        <Route path="/detail/:id" element={<DetailedTitlePage />} />
+        <Route path="/detail/:type/:id" element={<DetailedTitlePage />} />
         <Route path="/user_review" element={<UserReviews />} />
         {/* optional: catch-all route */}
         <Route path="*" element={<HomePage />} />

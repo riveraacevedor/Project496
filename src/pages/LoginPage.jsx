@@ -12,7 +12,7 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("https://cmpt496-backend-8wrp.onrender.com/users", {
+      const res = await fetch("https://cmpt496-backend-8wrp.onrender.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: username, password }), // match backend
